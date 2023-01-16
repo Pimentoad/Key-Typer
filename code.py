@@ -25,5 +25,6 @@ while True:
         led.value = True
         layout.write(keyList[currentKey].rstrip())
         led.value = False
+        time.sleep(0.01)  # debounce delay
         while not button.value:
             pass
