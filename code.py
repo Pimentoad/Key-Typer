@@ -39,7 +39,7 @@ while True:
         time.sleep(0.05)  # debounce delay
         while not button.value:
             pass
-    if not downButton.value:
+    if not downButton.value and upButton.value:
         currentKey += 1
         if currentKey > len(keyList) - 1:
             currentKey = 0
@@ -47,7 +47,7 @@ while True:
         time.sleep(0.05)  # debounce delay
         while not downButton.value:
             pass
-    if not upButton.value:
+    if not upButton.value and downButton.value:
         currentKey -= 1
         if currentKey < 0:
             currentKey = len(keyList) - 1
