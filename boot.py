@@ -3,14 +3,17 @@ import digitalio
 import storage
 import usb_cdc
 import usb_hid
-downLow = digitalio.DigitalInOut(board.A2)
+downLow = digitalio.DigitalInOut(board.A3)
 downLow.direction = digitalio.Direction.OUTPUT
 downLow.value = False
-upButton = digitalio.DigitalInOut(board.D10)
+upLow = digitalio.DigitalInOut(board.D13)
+upLow.direction = digitalio.Direction.OUTPUT
+upLow.value = True
+upButton = digitalio.DigitalInOut(board.D11)
 upButton.switch_to_input(pull=digitalio.Pull.DOWN)
-downButton = digitalio.DigitalInOut(board.A4)
+downButton = digitalio.DigitalInOut(board.A5)
 downButton.switch_to_input(pull=digitalio.Pull.UP)
 usb_hid.enable((usb_hid.Device.KEYBOARD,))
-if not upButton.value and downButton.value:
+if upButton.value and downButton.value:
     storage.disable_usb_drive()
     usb_cdc.disable()

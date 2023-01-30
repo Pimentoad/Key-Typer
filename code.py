@@ -8,18 +8,18 @@ from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 keyList = []
 currentKey = 0
-led = digitalio.DigitalInOut(board.LED)
-led.direction = digitalio.Direction.OUTPUT
-led.value = False
 #Button Setup
 button = digitalio.DigitalInOut(board.BUTTON)
 button.switch_to_input(pull=digitalio.Pull.UP)
-downLow = digitalio.DigitalInOut(board.A2)
+downLow = digitalio.DigitalInOut(board.A3)
 downLow.direction = digitalio.Direction.OUTPUT
 downLow.value = True
-upButton = digitalio.DigitalInOut(board.D12)
+upLow = digitalio.DigitalInOut(board.D13)
+upLow.direction = digitalio.Direction.OUTPUT
+upLow.value = True
+upButton = digitalio.DigitalInOut(board.D11)
 upButton.switch_to_input(pull=digitalio.Pull.DOWN)
-downButton = digitalio.DigitalInOut(board.A4)
+downButton = digitalio.DigitalInOut(board.A5)
 downButton.switch_to_input(pull=digitalio.Pull.DOWN)
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
@@ -40,9 +40,7 @@ board.DISPLAY.show(text_area)
 while True:
     time.sleep(0.1)  # debounce delay
     if not button.value:
-        led.value = True
         layout.write(keyList[currentKey].rstrip())
-        led.value = False
         time.sleep(0.05)  # debounce delay
         while not button.value:
             pass
