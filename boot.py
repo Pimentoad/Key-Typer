@@ -13,7 +13,7 @@ upButton = digitalio.DigitalInOut(board.D11)
 upButton.switch_to_input(pull=digitalio.Pull.DOWN)
 downButton = digitalio.DigitalInOut(board.A5)
 downButton.switch_to_input(pull=digitalio.Pull.UP)
-usb_hid.enable((usb_hid.Device.KEYBOARD,))
+usb_hid.enable((usb_hid.Device.KEYBOARD,usb_hid.Device.MOUSE,))
 if upButton.value and downButton.value:
     storage.disable_usb_drive()
     usb_cdc.disable()
